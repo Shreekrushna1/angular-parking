@@ -1,0 +1,87 @@
+<div
+class="fluid-container d-flex align-items-center justify-content-center"
+style="height: 100vh"
+>
+<nz-card
+style="width: 500px; border-radius: 30px"
+[nzBordered]="false"
+nzTitle="Register"
+>
+<form nz-form [formGroup]="dynamicForm" [nzLayout]="formLayout">
+    <ng-container
+      *ngFor="let form of registerFormConfig.formControls; let i = index"
+    >
+      <div class="col">
+        <nz-form-item *ngIf="!form.fieldType" >
+          <nz-form-label [nzSpan]="6">{{ form.label }}</nz-form-label>
+          <nz-form-control [nzSpan]="30" [nzErrorTip]='form.name + " " + "is required"'>
+              <input
+                nz-input
+                [type]="form.type"
+                [placeholder]="form.placeholder"
+                [formControlName]="form.name"
+              />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="form.fieldType">
+          <nz-form-label [nzSpan]="6">
+            {{ form.name }}
+          </nz-form-label>
+          <nz-form-control [nzSpan]="30">
+            <div class="d-flex">
+              <input
+                nz-input
+                [type]="form.type"
+                #cars
+                [placeholder]="form.placeholder"
+              />&nbsp;
+              <button
+                type="button"
+                nz-button
+                nzType="primary"
+                [nzSize]="'large'"
+                nzShape="round"
+                (click)="addCars(form.name, cars.value)"
+              >
+                Add
+              </button>
+            </div>
+            <div [formArrayName]="form.name" class="row">
+              <div
+                *ngFor="let item of getCarsControls(form.name); let i = index"
+                class="col-sm-6"
+              >
+              <div class="mb-1 mt-1">
+                <input
+                  nz-input
+                  #insertedValue
+                  [type]="form.type"
+                  [formControlName]="i"
+                  class="form-control"
+                  (input)="getPreviousValue(insertedValue.value, cars.value)"
+                />
+                <span *ngIf="getError(form.name,insertedValue.value)">
+                  Error: The current value is the same as the previous value.
+                </span>
+              </div>
+              </div>
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </ng-container>
+      <div class="card-footer mt-4 text-center">
+        <button
+          type="submit"
+          nz-button
+          nzType="primary"
+          [nzSize]="'large'"
+          nzShape="round"
+          (click)="submitForm()"
+        >
+          {{ registerFormConfig.saveBtnTitle }}
+        </button>
+      </div>
+    </form>
+    </nz-card>
+  </div>

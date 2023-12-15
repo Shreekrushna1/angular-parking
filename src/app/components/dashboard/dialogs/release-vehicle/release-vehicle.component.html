@@ -1,0 +1,26 @@
+  <div>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Select slot is required">
+        <nz-table #releaseTable [nzData]="data.vehicleData" nzShowPagination="false">
+          <th>
+            Vehicle Number
+          </th>
+          <th>
+            Booked Slot
+          </th>
+          <th class="text-center">Action</th>
+          <tbody>
+            <ng-container *ngFor="let vehicle of releaseTable.data">
+              <tr class="justify-content-between">
+                <td >{{vehicle.vehicleNumber}}</td>
+                <td >{{vehicle.slot}}</td>
+                <td class="text-center">
+                  <button nz-button nzType="primary" (click)="releaseVehicle(vehicle)">Release Vehicle</button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </nz-form-control>
+    </nz-form-item>
+  </div>

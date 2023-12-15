@@ -1,0 +1,58 @@
+<div
+  class="fluid-container d-flex align-items-center justify-content-center"
+  style="height: 100vh"
+>
+  <nz-card
+    style="width: 500px; border-radius: 30px"
+    [nzBordered]="false"
+    nzTitle="Login"
+  >
+    <form nz-form [formGroup]="dynamicForm" (ngSubmit)="submitForm()">
+      <ng-container
+        *ngFor="let form of loginFormConfig.formControls; let i = index"
+      >
+        <div class="col">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" [nzFor]="form.type">{{
+              form.label
+            }}</nz-form-label>
+            <nz-form-control [nzSpan]="30" [nzErrorTip]="form.name + ' ' + 'is required' ">
+              <input
+                nz-input
+                [type]="form.type"
+                [placeholder]="form.placeholder"
+                [id]="form.type"
+                [formControlName]="form.name"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </ng-container>
+      <div class="card-footer mt-4 text-center">
+        <button
+          type="submit"
+          nz-button
+          nzType="primary"
+          [nzSize]="'large'"
+          nzShape="round"
+        >
+          {{ loginFormConfig.formSubmitTitle }}
+        </button>
+        &nbsp;
+        <button
+        type="button"
+          nz-button
+          nzType="primary"
+          [nzSize]="'large'"
+          nzShape="round"
+          routerLink="/register">
+          Register
+        </button>
+      </div>
+    </form>
+    <div *ngIf="errorMessage" class="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </nz-card>
+</div>
+<!-- [nzErrorTip]="getGeneratedError(form,form.name)" -->

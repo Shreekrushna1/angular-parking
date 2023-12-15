@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "firstName": "dfsdf",
+      "lastName": "sdfsdf",
+      "email": "sdfsd@dsfsdf",
+      "password": "sdfsdfs",
+      "confirmpassword": "fsdfsdf",
+      "cars": [
+        "12",
+        "12"
+      ],
+      "bikes": [
+        "1"
+      ],
+      "id": 1
+    },
+    {
+      "firstName": "Shreekrushna",
+      "lastName": "Shinde",
+      "email": "krushnaproducts@gmail.com",
+      "password": "Krushna@11",
+      "confirmpassword": "Kruhna@11",
+      "cars": [
+        "1122",
+        "2211"
+      ],
+      "bikes": [
+        "1111"
+      ],
+      "id": 2
+    },
+    {
+      "firstName": "Hardika",
+      "lastName": "Dudhat",
+      "email": "hardika@gmail.com",
+      "password": "Hardika@123",
+      "confirmpassword": "Hardika@123",
+      "cars": [
+        "1000",
+        "2000"
+      ],
+      "bikes": [
+        "1001",
+        "2002"
+      ],
+      "id": 3
+    }
+  ],
+  "parking": [
+    {
+      "email": "krushnaproducts@gmail.com",
+      "vehicleType": "car",
+      "vehicleNumber": "2211",
+      "slot": "A10",
+      "id": 4
+    },
+    {
+      "email": "hardika@gmail.com",
+      "vehicleType": "bike",
+      "vehicleNumber": "1001",
+      "slot": "A1",
+      "id": 9
+    },
+    {
+      "email": "krushnaproducts@gmail.com",
+      "vehicleType": "bike",
+      "vehicleNumber": "1111",
+      "slot": "A2",
+      "id": 10
+    },
+    {
+      "email": "krushnaproducts@gmail.com",
+      "vehicleType": "car",
+      "vehicleNumber": "1122",
+      "slot": "A1",
+      "id": 11
+    },
+    {
+      "email": "hardika@gmail.com",
+      "vehicleType": "bike",
+      "vehicleNumber": "2002",
+      "slot": "A3",
+      "id": 12
+    }
+  ]
+}

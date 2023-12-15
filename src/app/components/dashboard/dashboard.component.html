@@ -1,0 +1,214 @@
+<nz-layout>
+  <nz-header>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <ng-container>
+        <button
+          nz-button
+          nz-dropdown
+          nzType="primary"
+          nzDanger
+          (click)="logout()"
+        >
+          <span nz-icon nzType="logout" nzTheme="outline"></span>
+          Log out</button
+        >&nbsp;
+        <nz-avatar
+          nzSize="large"
+          style="background-color: #1890ff"
+          [nzText]="currentUser ? getShortName : ''"
+        >
+        </nz-avatar>
+      </ng-container>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <div class="container">
+      <div class="d-flex m-3 justify-content-between">
+        <div *ngIf="currentUser; else welcomeUser">
+          Welcome ,
+          {{ currentUser[0].firstName + " " + currentUser[0].lastName }}
+        </div>
+        <ng-template #welcomeUser>Welcome , User</ng-template>
+        <ng-template #existingVehicle>Welcome , User</ng-template>
+        <div *ngIf="currentUser; else existingVehicle">
+          <b>Cars:</b> {{ currentUser[0].cars.length }}, <b>Bikes:</b>
+          {{ currentUser[0].bikes.length }}
+        </div>
+      </div>
+      <div class="container">
+        <div class="d-flex mt-3 justify-content-between">
+          <ng-container>
+            <div>
+              <button
+                nz-button
+                [ngClass]="
+                  isActive === 'car' ? 'selected-button' : 'not-selected'
+                "
+                (click)="changeType('car')"
+              >
+                CAR ({{ availableCars - parkedVehicle.length }})
+              </button>
+              <button
+                nz-button
+                [ngClass]="
+                  isActive === 'bike' ? 'selected-button' : 'not-selected'
+                "
+                (click)="changeType('bike')"
+              >
+                BIKE ({{
+                  bikesParked[0] !== undefined
+                    ? availableBikes - bikesParked.length
+                    : availableBikes
+                }})
+              </button>
+            </div>
+            <div>
+              <button
+                nz-button
+                nzType="primary"
+                *ngIf="parkedVehicle.length"
+                (click)="releaseCar(isActive)"
+              >
+                Release Car
+              </button>
+            </div>
+          </ng-container>
+        </div>
+        <div class="row" *ngIf="isActive === 'car'">
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnA; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot) && bookByAnotherUser[0] === 'car' ? 'booked-by-another-user' : isParked(slot, isActive)
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot)  ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnB; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user' : isParked(slot, isActive)
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnC; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user' : isParked(slot, isActive)
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnD; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user' : isParked(slot, isActive)
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row" *ngIf="isActive === 'bike'">
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnA; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot) && bookByAnotherUser[0] === 'bike'? 'booked-by-another-user-bike' : isParked(slot, 'bike')
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnB; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user-bike' : isParked(slot, 'bike')
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnC; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user-bike' : isParked(slot, 'bike')
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="mergeDiv text-center m-5">
+            <ng-container *ngFor="let slot of columnD; let i = index">
+              <div [class.col-1]="i % 2 === 0" [class.col-2]="i % 2 !== 0">
+                <button
+                  nz-button
+                  [disabled]="bookByAnotherUser.includes(slot)"
+                  [ngClass]="
+                    bookByAnotherUser.includes(slot)? 'booked-by-another-user-bike' : isParked(slot, 'bike')
+                  "
+                  (click)="handleButtonClick(slot)"
+                >
+                  {{ !bookByAnotherUser.includes(slot) ? slot : "" }}
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>

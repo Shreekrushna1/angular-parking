@@ -1,0 +1,102 @@
+.logo {
+  width: auto;
+  height: 31px;
+  float: left;
+  text-align: center;
+  color: white;
+}
+
+[nz-menu] {
+  line-height: 64px;
+  float: right;
+}
+
+[nz-menu-item] {
+  width: 100%;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+nz-layout {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.container {
+  button {
+    margin: 0px 5px;
+  }
+
+  .selected-button {
+    background-color: orange;
+    color: #fff;
+    width: auto;
+    height: auto;
+    padding: 12px 50px;
+    border-radius: 12px;
+    border-color: orange;
+  }
+
+  .not-selected {
+    background-color: #fff;
+    color: #000;
+    width: auto;
+    height: auto;
+    padding: 12px 50px;
+    border-radius: 12px;
+    border-color: none;
+  }
+  .row{
+    flex-wrap: nowrap;
+    .mergeDiv{
+      width: 230px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .col-1{
+        width: 50% !important;
+        border-top: 1px solid grey;
+        border-right: 1px solid grey;
+        border-bottom: 1px solid grey;
+        padding: 8px;
+      }
+      .col-2{
+        width: 50% !important;
+        border-top: 1px solid grey;
+        border-left: 1px solid grey;
+        border-bottom: 1px solid grey;
+        padding: 8px;
+      }
+      .parked{
+        background-color: orange;
+        color: #fff;
+      }
+      .non-parked{
+        background-color: rgb(183, 177, 177);
+        color: #000;
+      }
+      .booked-by-another-user{
+        background-image: url(../../../assets/car.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .booked-by-another-user-bike{
+        background-image: url(../../../assets/bike.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      button{
+        height: auto;
+        width: 5rem;
+        padding: 10px 30px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
